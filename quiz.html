@@ -87,7 +87,7 @@
 <body>
     <header>
         <img src="logo.png" alt="Logo">
-        <h1>Subject-Verb Agreement Quiz</h1>
+        <h1>Parts of Speech Quiz</h1>
     </header>
     <div class="container">
         <button id="start-button">Start Quiz</button>
@@ -96,32 +96,16 @@
                 <div id="question" class="question"></div>
                 <div id="options" class="options"></div>
             </div>
-            <div id="result"></div>
+            <div id="result" aria-live="polite"></div>
         </div>
     </div>
 
     <script>
         const questions = [
-            { question: "The condition of these books ____ ___ not good.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "The ladies wearing green dresses _______ my sisters.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "The girls ___ _____dancing.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "The pen ___ __on the table.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Either Susan or the girls _______ going to prepare dinner tonight.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "Neither Mohan nor his sister is going to attend the party.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "The books and the notebooks _______ kept on the table.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "The producer and director of this play __ ___an influential personality.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Rice and curry ________ my favorite dish.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Everything that glitters ____ ____not gold.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "___ _____ of the boys help me in the households.", options: ["neither", "either"], answer: 0 },
-            { question: "Either of the buses ___ ______ comfortable to travel.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "One of the students _______very well.", options: ["behaves", "behave", "behaving", "behaved"], answer: 0 },
-            { question: "Nobody ________ any hurry.", options: ["show", "shows"], answer: 1 },
-            { question: "There ______ a lot of chaos in the class.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "There _______ plenty of players to play.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "Raman, as well as Neha,______ present in the class.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Besides Sam, everybody _____ paying attention.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Several people _________ come to their duty.", options: ["haven’t", "has", "was", "have"], answer: 3 },
-            { question: "Both monitors _____ absent.", options: ["is", "are", "was", "were"], answer: 1 },
+            { question: "She was wearing really <u>beautiful</u> earrings.", options: ["Adjective", "Noun", "Adverb", "Preposition"], answer: 0 },
+            { question: "<u>Wow</u>, you have got a great score.", options: ["Conjunction", "Pronoun", "Interjection", "Noun"], answer: 2 },
+            { question: "The baby crawled <u>under</u> the bed.", options: ["Preposition", "Conjunction", "Adverb", "Adjective"], answer: 0 },
+            // Add more questions as needed
         ];
 
         let currentQuestionIndex = 0;
@@ -138,11 +122,12 @@
         });
 
         function showQuestion() {
-            questionElement.innerHTML = `${currentQuestionIndex + 1}. ${questions[currentQuestionIndex].question}`;
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.innerHTML = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
             optionsElement.innerHTML = '';
-            resultElement.innerHTML = '';
+            resultElement.textContent = '';
 
-            questions[currentQuestionIndex].options.forEach((option, index) => {
+            currentQuestion.options.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.textContent = option;
                 button.addEventListener('click', () => handleAnswer(button, index));
@@ -153,28 +138,36 @@
         function handleAnswer(button, selected) {
             const correctAnswer = questions[currentQuestionIndex].answer;
 
+            disableOptions();
             if (selected === correctAnswer) {
                 button.classList.add('correct');
                 playSound('correct.mp3');
-                resultElement.innerHTML = "Correct!";
-                setTimeout(() => {
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < questions.length) {
-                        showQuestion();
-                    } else {
-                        quizContainer.innerHTML = '<p>Quiz Completed! Well done!</p>';
-                    }
-                }, 2000);
+                resultElement.textContent = "Correct!";
+                setTimeout(nextQuestion, 2000);
             } else {
                 button.classList.add('wrong');
                 playSound('wrong.mp3');
-                resultElement.innerHTML = "Wrong! Try again.";
+                resultElement.textContent = "Wrong! Try again.";
+            }
+        }
+
+        function disableOptions() {
+            const buttons = optionsElement.querySelectorAll('button');
+            buttons.forEach(button => button.disabled = true);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                quizContainer.innerHTML = '<p>Quiz Completed! Well done!</p>';
             }
         }
 
         function playSound(file) {
             const sound = new Audio(file);
-            sound.play().catch(err => console.error(`Error playing sound: ${err}`));
+            sound.play().catch(err => console.warn('Sound playback failed:', err));
         }
     </script>
 </body>
