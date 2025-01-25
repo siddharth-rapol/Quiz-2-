@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav img {
+            height: 40px;
+        }
+        nav h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .feedback {
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .feedback.correct {
+            color: green;
+        }
+        .feedback.wrong {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <img src="logo.png" alt="Logo">
+        </div>
+        <h1>Quiz App</h1>
+    </nav>
+    <div class="container">
+        <div id="quiz-container">
+            <div class="question" id="question">Loading question...</div>
+            <input type="text" id="answer" placeholder="Your answer">
+            <button onclick="checkAnswer()">Submit</button>
+            <div class="feedback" id="feedback"></div>
+        </div>
+    </div>
+    <audio id="correct-sound" src="correct.mp3"></audio>
+    <audio id="wrong-sound" src="wrong.mp3"></audio>
+    <script>
+        const questions = [
+            { question: "What is the capital of France?", answer: "Paris" },
+            { question: "What is 2 + 2?", answer: "4" }
+        ];
+        let currentQuestion = 0;
+        let score = 0;
+        const questionElement = document.getElementById("question");
+        const answerElement = document.getElementById("answer");
+        const feedbackElement = document.getElementById("feedback");
+        const correctSound = document.getElementById("correct-sound");
+        const wrongSound = document.getElementById("wrong-sound");
+
+        function loadQuestion() {
+            if (currentQuestion < questions.length) {
+                questionElement.textContent = questions[currentQuestion].question;
+                feedbackElement.textContent = "";
+                answerElement.value = "";
+            } else {
+                alert(`Quiz finished! Your score is ${score}/${questions.length}.`);
+                questionElement.textContent = "Quiz completed!";
+                answerElement.style.display = "none";
+                document.querySelector("button").style.display = "none";
+            }
+        }
+
+        function checkAnswer() {
+            const userAnswer = answerElement.value.trim().toLowerCase();
+            const correctAnswer = questions[currentQuestion].answer.toLowerCase();
+            if (userAnswer === correctAnswer) {
+                feedbackElement.textContent = "Correct!";
+                feedbackElement.className = "feedback correct";
+                correctSound.play();
+                score++;
+            } else {
+                feedbackElement.textContent = "Wrong!";
+                feedbackElement.className = "feedback wrong";
+                wrongSound.play();
+            }
+            currentQuestion++;
+            setTimeout(loadQuestion, 1500);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
