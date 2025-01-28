@@ -93,28 +93,14 @@
             transform: translate(-50%, -50%);
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s ease-in-out;
         }
 
         .correct-icon {
             color: #4CAF50; /* Green */
-            animation: scale-in 0.5s forwards;
         }
 
         .wrong-icon {
             color: #f44336; /* Red */
-            animation: scale-in 0.5s forwards;
-        }
-
-        @keyframes scale-in {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
         }
     </style>
 </head>
