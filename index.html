@@ -163,12 +163,12 @@
         function handleAnswer(button, selected) {
             const correctAnswer = questions[currentQuestionIndex].answer;
 
-            disableOptions();
             if (selected === correctAnswer) {
                 button.classList.add('correct');
                 playSound('correct.mp3');
                 resultElement.textContent = "Correct!";
-                setTimeout(nextQuestion, 2000);
+                disableOptions(); // Disable all options
+                setTimeout(nextQuestion, 1000); // Proceed to the next question after 1 second
             } else {
                 button.classList.add('wrong');
                 playSound('wrong.mp3');
@@ -178,7 +178,7 @@
 
         function disableOptions() {
             const buttons = optionsElement.querySelectorAll('button');
-            buttons.forEach(button => button.disabled = true);
+            buttons.forEach(button => button.disabled = true); // Disable all buttons
         }
 
         function nextQuestion() {
