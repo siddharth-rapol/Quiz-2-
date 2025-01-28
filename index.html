@@ -82,6 +82,40 @@
             font-size: 20px;
             margin-top: 20px;
         }
+        
+        /* Icon styles */
+        .correct-icon,
+        .wrong-icon {
+            font-size: 50px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .correct-icon {
+            color: #4CAF50; /* Green */
+            animation: scale-in 0.5s forwards;
+        }
+
+        .wrong-icon {
+            color: #f44336; /* Red */
+            animation: scale-in 0.5s forwards;
+        }
+
+        @keyframes scale-in {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
     </style>
 </head>
 <body>
@@ -99,6 +133,10 @@
             <div id="result" aria-live="polite"></div>
         </div>
     </div>
+
+    <!-- Icons for correct and wrong answers -->
+    <div id="correct-icon" class="correct-icon">&#10004;</div>
+    <div id="wrong-icon" class="wrong-icon">&#10060;</div>
 
     <script>
         const questions = [
@@ -163,17 +201,30 @@
         function handleAnswer(button, selected) {
             const correctAnswer = questions[currentQuestionIndex].answer;
 
+            const correctIcon = document.getElementById('correct-icon');
+            const wrongIcon = document.getElementById('wrong-icon');
+
+            // Reset the icons' opacity
+            correctIcon.style.opacity = 0;
+            wrongIcon.style.opacity = 0;
+
             if (selected === correctAnswer) {
                 button.classList.add('correct');
                 playSound('correct.mp3');
                 resultElement.textContent = "Correct!";
-                disableOptions(); // Disable all options
-                setTimeout(nextQuestion, 1000); // Proceed to the next question after 1 second
+                correctIcon.style.opacity = 1; // Show the tick
             } else {
                 button.classList.add('wrong');
                 playSound('wrong.mp3');
                 resultElement.textContent = "Wrong! Try again.";
+                wrongIcon.style.opacity = 1; // Show the cross
             }
+
+            // Show the icon for 1 second before proceeding
+            setTimeout(() => {
+                disableOptions(); // Disable all options
+                setTimeout(nextQuestion, 1000); // Proceed to the next question after 1 second
+            }, 500);
         }
 
         function disableOptions() {
