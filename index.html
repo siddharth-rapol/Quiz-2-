@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subject Verb Agreement Quiz</title>
+    <title>Parts of Speech Quiz</title>
     <style>
         body {
-            font-family: Arial, sans-serif; 
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #1a1a1a;
@@ -78,36 +78,16 @@
             font-size: 18px;
             cursor: pointer;
         }
-        #result {
-            font-size: 20px;
-            margin-top: 20px;
-        }
-        
-        /* Icon styles */
-        .correct-icon,
-        .wrong-icon {
-            font-size: 50px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .correct-icon {
-            color: #4CAF50; /* Green */
-        }
-
-        .wrong-icon {
-            color: #f44336; /* Red */
+        u {
+            text-decoration: underline;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <header>
         <img src="logo.png" alt="Logo">
-        <h1>Subject Verb Agreement Quiz</h1>
+        <h1>Parts of Speech</h1>
     </header>
     <div class="container">
         <button id="start-button">Start Quiz</button>
@@ -116,45 +96,31 @@
                 <div id="question" class="question"></div>
                 <div id="options" class="options"></div>
             </div>
-            <div id="result" aria-live="polite"></div>
         </div>
     </div>
 
-    <!-- Icons for correct and wrong answers -->
-    <div id="correct-icon" class="correct-icon">&#10004;</div>
-    <div id="wrong-icon" class="wrong-icon">&#10060;</div>
-
     <script>
         const questions = [
-            { question: "The condition of these books ___ not good.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "The ladies wearing green dresses _______ my sisters.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "The girls ___ dancing.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "The pen ___ on the table.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Either Susan or the girls _______ going to prepare dinner tonight.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "Neither Mohan nor his sister ___ going to attend the party.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "The books and the notebooks _______ kept on the table.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "The producer and director of this play ___ an influential personality.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Rice and curry ________ my favorite dish.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Everything that glitters ___ not gold.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "___ of the boys help me in the households.", options: ["neither", "either"], answer: 0 },
-            { question: "Either of the buses ___ comfortable to travel.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "One of the students _______ very well.", options: ["behaves", "behave", "behaving", "behaved"], answer: 0 },
-            { question: "Nobody ________ any hurry.", options: ["show", "shows"], answer: 1 },
-            { question: "There ______ a lot of chaos in the class.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "There _______ plenty of players to play.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "Raman, as well as Neha, ______ present in the class.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Besides Sam, everybody _____ paying attention.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Several people _________ come to their duty.", options: ["haven’t", "has", "was", "have"], answer: 3 },
-            { question: "Both monitors _____ absent.", options: ["is", "are", "was", "were"], answer: 1 },
-            { question: "Much of the work ___ done.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "A little stress ___ manageable.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "20 kilos ___ heavy to lift.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "2 years ___ the time given to complete your dissertation.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "10 km ___ not too far to cover with a car.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Maldives ___ an island country which is beautiful.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Mathematics _______ practice.", options: ["require", "requires"], answer: 1 },
-            { question: "Gulliver’s Travels ___ an interesting book.", options: ["is", "are", "was", "were"], answer: 0 },
-            { question: "Wuthering Heights ___ an English novel.", options: ["is", "are", "was", "were"], answer: 0 }
+            { question: "She was wearing really <u>beautiful</u> earrings.", options: ["Adjective", "Noun", "Adverb", "Preposition"], answer: 0 },
+            { question: "<u>Wow</u>, you have got a great score.", options: ["Conjunction", "Pronoun", "Interjection", "Noun"], answer: 2 },
+            { question: "The baby crawled <u>under</u> the bed.", options: ["Preposition", "Conjunction", "Adverb", "Adjective"], answer: 0 },
+            { question: "She <u>quickly</u> packed her bag and left.", options: ["Noun", "Adjective", "Verb", "Adverb"], answer: 3 },
+            { question: "This is a <u>depressing</u> time to be living in London as people are arguing over the election.", options: ["Interjection", "Adjective", "Adverb", "Noun"], answer: 1 },
+            { question: "Take your first left then go <u>over</u> the bridge.", options: ["Noun", "Preposition", "Verb", "Interjection"], answer: 1 },
+            { question: "There is a party next week <u>though</u> I don’t think I can go.", options: ["Preposition", "Conjunction", "Adverb", "Noun"], answer: 1 },
+            { question: "He thinks we will arrive at <u>roughly</u> 5pm.", options: ["Pronoun", "Preposition", "Conjunction", "Verb"], answer: 1 },
+            { question: "The music is <u>very</u> loud.", options: ["Adjective", "Interjection", "Preposition", "Noun"], answer: 0 },
+            { question: "He goes to Spain often not only for the sun but also for the <u>food</u>.", options: ["Conjunction", "Adverb", "Preposition", "Noun"], answer: 2 },
+            { question: "Because the floor had just been mopped, Allan and Elaine slipped and fell as they ran to the <u>meeting</u>.", options: ["Preposition", "Conjunction", "Noun", "Adjective"], answer: 2 },
+            { question: "I visited the <u>Golden Temple</u> in Amritsar, India in the vacation.", options: ["Noun", "Interjection", "Pronoun", "Conjunction"], answer: 0 },
+            { question: "Her expensive brown English antique new <u>watch</u> stopped working.", options: ["Conjunction", "Adverb", "Pronoun", "Noun"], answer: 3 },
+            { question: "My <u>mother</u> is cooking dinner for us.", options: ["Preposition", "Verb", "Noun", "Adverb"], answer: 2 },
+            { question: "<u>Oh</u>, I didn’t see you there!", options: ["Preposition", "Conjunction", "Noun", "Interjection"], answer: 3 },
+            { question: "He's the <u>richest</u> man in the world.", options: ["Adjective", "Verb", "Conjunction", "Preposition"], answer: 0 },
+            { question: "<u>Although</u> we were tired, we stayed up late.", options: ["Preposition", "Conjunction", "Noun", "Interjection"], answer: 1 },
+            { question: "<u>Poverty</u> is a global problem.", options: ["Adjective", "Interjection", "Preposition", "Noun"], answer: 3 },
+            { question: "He has many <u>influential</u> friends.", options: ["Conjunction", "Verb", "Preposition", "Noun"], answer: 3 },
+            { question: "Hari is the most <u>intelligent</u> boy in the class.", options: ["Pronoun", "Preposition", "Conjunction", "Adjective"], answer: 3 }
         ];
 
         let currentQuestionIndex = 0;
@@ -162,7 +128,6 @@
         const questionElement = document.getElementById('question');
         const optionsElement = document.getElementById('options');
         const startButton = document.getElementById('start-button');
-        const resultElement = document.getElementById('result');
 
         startButton.addEventListener('click', () => {
             startButton.style.display = 'none';
@@ -171,12 +136,10 @@
         });
 
         function showQuestion() {
-            const currentQuestion = questions[currentQuestionIndex];
-            questionElement.innerHTML = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+            questionElement.innerHTML = `${currentQuestionIndex + 1}. ${questions[currentQuestionIndex].question}`;
             optionsElement.innerHTML = '';
-            resultElement.textContent = '';
 
-            currentQuestion.options.forEach((option, index) => {
+            questions[currentQuestionIndex].options.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.textContent = option;
                 button.addEventListener('click', () => handleAnswer(button, index));
@@ -187,49 +150,23 @@
         function handleAnswer(button, selected) {
             const correctAnswer = questions[currentQuestionIndex].answer;
 
-            const correctIcon = document.getElementById('correct-icon');
-            const wrongIcon = document.getElementById('wrong-icon');
-
-            // Reset the icons' opacity
-            correctIcon.style.opacity = 0;
-            wrongIcon.style.opacity = 0;
-
             if (selected === correctAnswer) {
                 button.classList.add('correct');
-                playSound('correct.mp3');
-                resultElement.textContent = "Correct!";
-                correctIcon.style.opacity = 1; // Show the tick
+                const sound = new Audio('correct.mp3');
+                sound.play();
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        showQuestion();
+                    } else {
+                        quizContainer.innerHTML = '<p>Quiz Completed! Well done!</p>';
+                    }
+                }, 1000);
             } else {
                 button.classList.add('wrong');
-                playSound('wrong.mp3');
-                resultElement.textContent = "Wrong! Try again.";
-                wrongIcon.style.opacity = 1; // Show the cross
+                const sound = new Audio('wrong.mp3');
+                sound.play();
             }
-
-            // Show the icon for 1 second before proceeding
-            setTimeout(() => {
-                disableOptions(); // Disable all options
-                setTimeout(nextQuestion, 1000); // Proceed to the next question after 1 second
-            }, 500);
-        }
-
-        function disableOptions() {
-            const buttons = optionsElement.querySelectorAll('button');
-            buttons.forEach(button => button.disabled = true); // Disable all buttons
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                showQuestion();
-            } else {
-                quizContainer.innerHTML = '<p>Quiz Completed! Well done!</p>';
-            }
-        }
-
-        function playSound(file) {
-            const sound = new Audio(file);
-            sound.play().catch(err => console.warn('Sound playback failed:', err));
         }
     </script>
 </body>
